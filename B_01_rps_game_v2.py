@@ -83,21 +83,21 @@ def rps_compare(user, comp):
 
     # If the user and the computer choice is the same, it's a tie
     if user == comp:
-        round_result = "tie"
+        result = "tie"
 
         # There are three ways to win
     elif user == "paper" and comp == "rock":
-        round_result = "win"
+        result = "win"
     elif user == "scissors" and comp == "paper":
-        round_result = "win"
+        result = "win"
     elif user == "rock" and comp == "scissors":
-        round_result = "win"
+        result = "win"
 
         # if it's not a win / tie,then it's a loss
     else:
-        round_result = "lose"
+        result = "lose"
 
-    return round_result
+    return result
 
 
 # Main Routine starts here
@@ -105,11 +105,8 @@ def rps_compare(user, comp):
 # Initialise game variables
 mode = "regular"
 rounds_played = 0
-rounds_tied = 0
-rounds_lost = 0
 
 rps_list = ["rock", "paper", "scissors", "xxx"]
-game_history = []
 
 print("💎📃✂️ Rock / Paper / Scissors game 💎📃✂️")
 print()
@@ -153,26 +150,7 @@ while rounds_played < num_rounds:
         break
 
     result = rps_compare(user_choice, comp_choice)
-
-    # Adjust game lost / game tied counters and add results to game history
-    if result == "tie":
-        rounds_tied += 1
-        feedback = "👔👔 It's a tie! 👔👔"
-
-    elif result == "lose":
-        rounds_lost += 1
-        feedback = "😢😢 You lose. 😢😢"
-    else:
-        feedback = "👍👍 You won. 👍👍"
-
-    # Set up round feedback and output it user.
-    # Add it to the game history list (include the round number)
-    round_feedback = f"{user_choice} vs {comp_choice}, {feedback}"
-    history_item = f"Round: {rounds_played} - {round_feedback}"
-
-    print(round_feedback)
-    game_history.append(history_item)
-
+    print(f"{user_choice} vs {comp_choice}, {result}")
 
     rounds_played += 1
 
@@ -182,30 +160,4 @@ while rounds_played < num_rounds:
 
 # Game loop ends here
 
-# calculate stats if user has played at least one round
-if len(game_history) > 0:
-    # Game history / Statistics area
-
-    # Calculate statistics
-    rounds_won = rounds_played - rounds_tied - rounds_lost
-    percent_won = rounds_won / rounds_played * 100
-    percent_lost = rounds_lost / rounds_played * 100
-    percent_tied = 100 - percent_won - percent_lost
-
-    # Output Game Statistics
-    print("📊📊📊 Game Statistics 📊📊📊")
-    print(f"👍 Won: {percent_won: 2f} \t"
-           f"Lost: {percent_lost: 2f} \t"
-          f"Tied: {percent_tied: 2f}")
-
-    # ask user if they/their game history and output it if requested
-    see_history = string_checker("\nDo you want to see your game history? ")
-    if see_history == "yes":
-        for item in game_history:
-            print(item)
-
-        print()
-        print("Thanks for playing.")
-
-else:
-    print("🐔🐔🐔 Oops -  You chickened out! 🐔🐔🐔")
+# Game history / Statistics area
