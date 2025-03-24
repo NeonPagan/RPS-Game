@@ -104,7 +104,7 @@ def rps_compare(user, comp):
 
 # Initialise game variables
 mode = "regular"
-rounds_played = 0
+rounds_played = 1
 rounds_tied = 0
 rounds_lost = 0
 
